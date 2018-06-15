@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-               <new-product-form></new-product-form>
+               <new-product-form @completed="pullProduct"></new-product-form>
             </div>
         </div>
     </div>
@@ -40,6 +40,10 @@
         methods:{
             getMn(pd){
                 return moment(pd.created_at).fromNow();
+            },
+            pullProduct(){
+                Product.getAll()
+                    .then(({data})=>this.products=data);
             }
         }
     }

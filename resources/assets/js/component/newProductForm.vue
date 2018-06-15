@@ -47,7 +47,7 @@
 
         methods:{
             newProduct(){
-                this.form.post('api/new-product').then(result=>this.okInfo=result);
+                this.form.post('api/new-product').then(result=>[this.okInfo=result, this.$emit('completed')]);
             }
             ,
             clearInfo(){

@@ -62307,6 +62307,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         getMn: function getMn(pd) {
             return __WEBPACK_IMPORTED_MODULE_0_moment___default()(pd.created_at).fromNow();
+        },
+        pullProduct: function pullProduct() {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_1__model_products__["a" /* default */].getAll().then(function (_ref2) {
+                var data = _ref2.data;
+                return _this2.products = data;
+            });
         }
     }
 });
@@ -62613,7 +62621,12 @@ var render = function() {
         })
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [_c("new-product-form")], 1)
+      _c(
+        "div",
+        { staticClass: "col-md-6" },
+        [_c("new-product-form", { on: { completed: _vm.pullProduct } })],
+        1
+      )
     ])
   ])
 }
@@ -62898,7 +62911,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             this.form.post('api/new-product').then(function (result) {
-                return _this.okInfo = result;
+                return [_this.okInfo = result, _this.$emit('completed')];
             });
         },
         clearInfo: function clearInfo() {
